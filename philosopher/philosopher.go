@@ -25,22 +25,25 @@ func (p *Philosopher) Think() {
 	fmt.Printf("Philosoper %d is thinking...\n", p.Id)
 }
 
-func (p *Philosopher) AcquireForks() {
+func (p *Philosopher) AcquireLeftFork() {
 	p.State = Waiting
-
-	fmt.Printf("Philosopher %d is waiting for the left fork...\n", p.Id)
+	fmt.Printf("Philosopher %d is waiting for the letf fork...\n", p.Id)
 	p.LeftFork.Mutex.Lock()
 
-	fmt.Printf("Philosopher %d piccked up the left fork.\n", p.Id)
+	fmt.Printf("Philosopher %d picked up the left fork!\n", p.Id)
+}
+
+func (p *Philosopher) AcquireRightFork() {
 	fmt.Printf("Philosopher %d is waiting for the right fork...\n", p.Id)
+
 	p.RightFork.Mutex.Lock()
 
-	fmt.Printf("Philosopher %d picked up the rihht fork\n", p.Id)
+	fmt.Printf("Philosopher %d picked up the right fork!\n", p.Id)
 }
 
 func (p *Philosopher) Eat() {
 	p.State = Eating
-	fmt.Printf("Philosopher %d is eating\n", p.Id)
+	fmt.Printf("Philosopher %d is eating!\n", p.Id)
 }
 
 func (p *Philosopher) ReleaseForks() {
@@ -48,5 +51,5 @@ func (p *Philosopher) ReleaseForks() {
 	p.LeftFork.Mutex.Unlock()
 
 	p.State = Thinking
-	fmt.Printf("Philosopher %d releaesed both forks\n", p.Id)
+	fmt.Printf("Philosopher %d releaesed both forks!\n", p.Id)
 }
