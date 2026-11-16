@@ -4,6 +4,7 @@ import (
 	"dining-philosophers/fork"
 	"dining-philosophers/philosopher"
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -78,4 +79,44 @@ func (s *Simulation) RunDeadlock() {
 		fmt.Println("\nDEADLOCK DETECTED!")
 		fmt.Println("All philosophers are waiting for their right forks")
 	}
+}
+
+func (s *Simulation) RunSolution() {
+	fmt.Println("Starting dining philosophers solution...")
+
+	semaphore := make(chan struct{}, philosopherCount-1)
+
+	var wg sync.WaitGroup
+
+	const mealCount = 2
+
+	for _, p := range s.Philosophers {
+		wg.Add(1)
+
+		go func(p *philosopher.Philosopher) {
+			defer wg.Done()
+
+			for i := 0; i < mealCount; i++ {
+				p.Think()
+				time.Sleep(500 * time.Millisecond)
+
+				semaphore <- struct{}{}
+
+				p.AcquireLeftFork()
+				p.AcquireRightFork()
+
+				p.Eat()
+				time.Sleep(500 * time.Millisecond)
+
+				p.ReleaseForks()
+
+				<-semaphore
+			}
+		}(p)
+	}
+
+	wg.Wait()
+
+	fmt.Println("\nAll philosophers finished eating!")
+	fmt.Println("Deadlock successfully prevented.")
 }
