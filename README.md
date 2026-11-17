@@ -91,8 +91,8 @@ dining-philosophers/
 ### Clonar o Repositório
 
 ```bash
-git clone https://github.com/rafael-vincensi/dining-philosophers.git
-cd dining-philosophers
+git clone https://github.com/rafael-vincensi/go-dining-philosophers.git
+cd go-dining-philosophers
 ```
 
 ### Executar a Aplicação
@@ -117,7 +117,7 @@ go build ./...
 
 A aplicação apresenta dois cenários principais:
 
-**Cenário 1 — Demonstração de Deadlock**
+**Cenário 1 - Demonstração de Deadlock**
 
 Os cinco filósofos adquirem seus respectivos garfos esquerdos e, em seguida, tentam adquirir os garfos direitos. Como cada recurso necessário está em posse de um filósofo vizinho, todos acabam bloqueados.
 
@@ -132,7 +132,7 @@ DEADLOCK DETECTED!
 All philosophers are waiting for their right forks.
 ```
 
-**Cenário 2 — Prevenção de Deadlock**
+**Cenário 2 - Prevenção de Deadlock**
 
 O semáforo limita a quantidade de filósofos que podem tentar adquirir os garfos simultaneamente a quatro, permitindo que a simulação avance sem ocorrência de deadlock.
 
@@ -151,6 +151,6 @@ A aplicação demonstra como rotinas concorrentes disputam recursos compartilhad
 
 <div align="center">
 
-Desenvolvido por [rafael-vincensi](https://github.com/rafael-vincensi) e Marcos Felipe Schmid.
+Built by [rafael-vincensi](https://github.com/rafael-vincensi) e Marcos Felipe Schmid.
 
 </div>
